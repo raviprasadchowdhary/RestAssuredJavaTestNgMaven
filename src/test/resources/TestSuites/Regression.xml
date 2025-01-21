@@ -4,9 +4,9 @@
 
     <test name="Positive Test">
         <classes>
-            <class name="TesConfiguration">
+            <class name="com.herokuapp.restfulbooker.HealthCheckTest">
                 <methods>
-                    <include name="methodName"/>
+                    <include name="healthCheckTest"/>
                 </methods>
             </class>
         </classes>
