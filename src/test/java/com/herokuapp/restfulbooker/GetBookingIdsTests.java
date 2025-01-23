@@ -10,7 +10,7 @@ import java.util.List;
 public class GetBookingIdsTests {
 
     @Test
-    public void getBookingIdsWithoutFilter(){
+    public void getBookingIdsWithoutFilterTest(){
         // Get response
         Response response = RestAssured.get("https://restful-booker.herokuapp.com/booking");
 
