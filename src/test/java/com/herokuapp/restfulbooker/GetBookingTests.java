@@ -26,6 +26,7 @@ public class GetBookingTests {
         softAssert.assertEquals(jsonPath.getString("bookingdates.checkin"), "2018-01-01");
         softAssert.assertEquals(jsonPath.getString("bookingdates.checkout"), "2019-01-01");
         softAssert.assertEquals(jsonPath.getString("additionalneeds"),"Breakfast");
+        softAssert.assertAll();
 
     }
 }
