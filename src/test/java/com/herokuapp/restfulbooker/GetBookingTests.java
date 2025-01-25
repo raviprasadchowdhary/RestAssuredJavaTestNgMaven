@@ -7,25 +7,26 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class GetBookingTests {
+public class GetBookingTests extends BaseTest{
+    SoftAssert softAssert = new SoftAssert();
 
     @Test
     public void getBookingAndVerifyResponseTest(){
-        SoftAssert softAssert = new SoftAssert();
 
-        Response response = RestAssured.get("https://restful-booker.herokuapp.com/booking/1");
+        Response responseCreateBooking = createBooking();
+        int bookingId = responseCreateBooking.jsonPath().getInt("bookingid");
+        Response response = RestAssured.get("https://restful-booker.herokuapp.com/booking/" + bookingId);
 
         Assert.assertEquals(response.getStatusCode(), 200);
 
         JsonPath jsonPath = new JsonPath(response.asString());
-
-        softAssert.assertEquals(jsonPath.getString("firstname"), "James");
-        softAssert.assertEquals(jsonPath.getString("lastname"), "Brown");
-        softAssert.assertEquals(jsonPath.getInt("totalprice"), 111);
+        softAssert.assertEquals(jsonPath.getString("firstname"), "Alex");
+        softAssert.assertEquals(jsonPath.getString("lastname"), "Periera");
+        softAssert.assertEquals(jsonPath.getInt("totalprice"), 100);
         softAssert.assertTrue(jsonPath.getBoolean("depositpaid"));
-        softAssert.assertEquals(jsonPath.getString("bookingdates.checkin"), "2018-01-01");
-        softAssert.assertEquals(jsonPath.getString("bookingdates.checkout"), "2019-01-01");
-        softAssert.assertEquals(jsonPath.getString("additionalneeds"),"Breakfast");
+        softAssert.assertEquals(jsonPath.getString("bookingdates.checkin"), "2025-01-01");
+        softAssert.assertEquals(jsonPath.getString("bookingdates.checkout"), "2025-01-10");
+        softAssert.assertEquals(jsonPath.getString("additionalneeds"),"Wrestling");
         softAssert.assertAll();
 
     }

@@ -25,4 +25,23 @@ public class BaseTest {
         //get response
         return RestAssured.given().body(body.toString()).contentType(ContentType.JSON).post("https://restful-booker.herokuapp.com/booking");
     }
+
+    protected Response updateBooking(int bookingId){
+        //create json body
+        JSONObject body = new JSONObject();
+        body.put("firstname", "Alex2");
+        body.put("lastname", "Periera2");
+        body.put("totalprice",102 );
+        body.put("depositpaid", false);
+
+        JSONObject bookingdates = new JSONObject();
+        bookingdates.put("checkin", "2025-02-01");
+        bookingdates.put("checkout", "2025-02-10");
+
+        body.put("bookingdates", bookingdates);
+        body.put("additionalneeds", "Wrestling2");
+
+        //get response
+        return RestAssured.given().body(body.toString()).contentType(ContentType.JSON).header("Authorization", "Basic YWRtaW46cGFzc3dvcmQxMjM=").put("https://restful-booker.herokuapp.com/booking/" + bookingId);
+    }
 }
