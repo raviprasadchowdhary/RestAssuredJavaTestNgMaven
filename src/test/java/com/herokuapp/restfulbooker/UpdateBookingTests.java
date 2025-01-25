@@ -1,6 +1,7 @@
 package com.herokuapp.restfulbooker;
 
 import io.restassured.response.Response;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -13,6 +14,8 @@ public class UpdateBookingTests extends BaseTest{
         int bookingId = createBookingResponse.jsonPath().getInt("bookingid");
 
         Response response = updateBooking(bookingId);
+
+        Assert.assertEquals(response.getStatusCode(), 200);
 
         softAssert.assertEquals(response.jsonPath().getString("firstname"), "Alex2");
         softAssert.assertEquals(response.jsonPath().getString("lastname"), "Periera2");
