@@ -24,5 +24,6 @@ public class UpdateBookingTests extends BaseTest{
         softAssert.assertEquals(response.jsonPath().getString("bookingdates.checkin"), "2025-02-01");
         softAssert.assertEquals(response.jsonPath().getString("bookingdates.checkout"), "2025-02-10");
         softAssert.assertEquals(response.jsonPath().getString("additionalneeds"), "Wrestling2");
+        softAssert.assertAll();
     }
 }
