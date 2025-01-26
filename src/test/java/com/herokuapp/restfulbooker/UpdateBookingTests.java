@@ -8,7 +8,7 @@ import org.testng.asserts.SoftAssert;
 public class UpdateBookingTests extends BaseTest{
     SoftAssert softAssert = new SoftAssert();
 
-    @Test(enabled = true)
+    @Test
     public void updateBookingTest(){
         Response createBookingResponse = createBooking();
         int bookingId = createBookingResponse.jsonPath().getInt("bookingid");

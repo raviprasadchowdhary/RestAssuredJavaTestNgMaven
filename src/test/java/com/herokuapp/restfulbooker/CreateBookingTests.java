@@ -9,7 +9,7 @@ import org.testng.asserts.SoftAssert;
 public class CreateBookingTests extends BaseTest{
     SoftAssert softAssert = new SoftAssert();
 
-    @Test(enabled = true)
+    @Test
     public void createBookingTest(){
         Response response = createBooking();
 

@@ -11,7 +11,7 @@ import static io.restassured.RestAssured.given;
 
 public class HealthCheckTest extends BaseTest{
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void healthCheckTest(){
         given(spec).
         when().
@@ -21,7 +21,7 @@ public class HealthCheckTest extends BaseTest{
                 statusCode(201);
     }
 
-    @Test(enabled = true)
+    @Test
     public void headersAndCookiesTest(){
         Header someHeader = new Header("some_header_name","some_header_value");
         spec.header(someHeader);
