@@ -1,23 +1,19 @@
-package com.herokuapp.restfulbooker.pojo.request;
+package com.herokuapp.restfulbooker.pojo.response;
 
 public class Booking {
-    private String firstname;
-    private String lastname;
-    private int totalprice;
-    private boolean depositpaid;
-    private Bookingdates bookingdates;
-    private String additionalneeds;
 
-    public Booking(String firstname, String lastname, int totalprice, boolean depositpaid, Bookingdates bookingDates, String additionalneeds) {
+    public Booking(String firstname, String lasttname, int totalprice, Boolean depositpaid, Bookingdates bookingdates, String additionalneeds) {
         this.firstname = firstname;
-        this.lastname = lastname;
+        this.lastname = lasttname;
         this.totalprice = totalprice;
         this.depositpaid = depositpaid;
-        this.bookingdates = bookingDates;
+        this.bookingdates = bookingdates;
         this.additionalneeds = additionalneeds;
     }
 
-    @Override
+    public Booking() {
+    }
+
     public String toString() {
         return "{\"firstname\":" + "\"" + firstname + "\"" +
                 ", \"lastname\":" + "\"" + lastname + "\"" +
@@ -26,6 +22,13 @@ public class Booking {
                 + ", \"bookingdates\":" + bookingdates +
                 ", \"additionalneeds\":" + "\"" + additionalneeds + "\"" + "}";
     }
+
+    private String firstname;
+    private String lastname;
+    private int totalprice;
+    private Boolean depositpaid;
+    private Bookingdates bookingdates;
+    private String additionalneeds;
 
     public String getFirstname() {
         return firstname;
@@ -51,11 +54,11 @@ public class Booking {
         this.totalprice = totalprice;
     }
 
-    public boolean isDepositpaid() {
+    public Boolean getDepositpaid() {
         return depositpaid;
     }
 
-    public void setDepositpaid(boolean depositpaid) {
+    public void setDepositpaid(Boolean depositpaid) {
         this.depositpaid = depositpaid;
     }
 

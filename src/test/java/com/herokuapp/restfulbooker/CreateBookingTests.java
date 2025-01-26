@@ -1,6 +1,11 @@
 package com.herokuapp.restfulbooker;
 
 
+import com.herokuapp.restfulbooker.pojo.request.Booking;
+import com.herokuapp.restfulbooker.pojo.request.Bookingdates;
+import com.herokuapp.restfulbooker.pojo.response.Bookingid;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -27,7 +32,7 @@ public class CreateBookingTests extends BaseTest{
     }
 
     @Test
-    public void createBookingWithPojoTest(){
+    public void createBookingWithPojoSerializationTest(){
         Response response = createBookingByPojo();
 
         //asserts
@@ -41,5 +46,20 @@ public class CreateBookingTests extends BaseTest{
         softAssert.assertEquals(response.jsonPath().getString("booking.bookingdates.checkout"), "2025-01-10");
         softAssert.assertEquals(response.jsonPath().getString("booking.additionalneeds"), "Wrestling");
         softAssert.assertAll();
+    }
+
+    @Test
+    public void createBookingWithPojoDeserializationTest(){
+//        Response response = createBookingByPojo();
+
+        Bookingdates bookingDates = new Bookingdates("2025-01-01","2025-01-10");
+        Booking booking = new Booking("Alex","Periera",100,true,bookingDates, "Wrestling");
+        Response response = RestAssured.given(spec).log().all().contentType(ContentType.JSON).body(booking.toString()).post("booking");
+
+        Bookingid bookingid = response.as(Bookingid.class);
+
+        //asserts
+        Assert.assertEquals(response.getStatusCode(), 200);
+        Assert.assertEquals(bookingid.getBooking().toString(), booking.toString());
     }
 }

@@ -1,10 +1,10 @@
 package com.herokuapp.restfulbooker.pojo.request;
 
-public class BookingDates {
+public class Bookingdates {
     private String checkin;
     private String checkout;
 
-    public BookingDates(String checkin, String checkout) {
+    public Bookingdates(String checkin, String checkout) {
         this.checkin = checkin;
         this.checkout = checkout;
     }
