@@ -1,11 +1,22 @@
 package com.herokuapp.restfulbooker;
 
 import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.json.JSONObject;
+import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
+    RequestSpecification spec;
+
+    @BeforeMethod
+    public void setUp(){
+        spec = new RequestSpecBuilder().
+                setBaseUri("https://restful-booker.herokuapp.com/").
+                build();
+    }
 
     protected Response createBooking(){
         //create json body
@@ -23,7 +34,7 @@ public class BaseTest {
         body.put("additionalneeds", "Wrestling");
 
         //get response
-        return RestAssured.given().body(body.toString()).contentType(ContentType.JSON).post("https://restful-booker.herokuapp.com/booking");
+        return RestAssured.given(spec).body(body.toString()).contentType(ContentType.JSON).post("booking");
     }
 
     protected Response updateBooking(int bookingId){
@@ -42,7 +53,7 @@ public class BaseTest {
         body.put("additionalneeds", "Wrestling2");
 
         //get response
-        return RestAssured.given().body(body.toString()).contentType(ContentType.JSON).auth().preemptive().basic("admin","password123").put("https://restful-booker.herokuapp.com/booking/" + bookingId);
+        return RestAssured.given(spec).body(body.toString()).contentType(ContentType.JSON).auth().preemptive().basic("admin","password123").put("booking/" + bookingId);
     }
 
     protected Response partialUpdateBooking(int bookingId){
@@ -55,11 +66,11 @@ public class BaseTest {
         bookingDates.put("checkout", "2025-02-10");
         body.put("bookingdates", bookingDates);
 
-        return RestAssured.given().body(body.toString()).contentType(ContentType.JSON).auth().preemptive().basic("admin","password123").patch("https://restful-booker.herokuapp.com/booking/" + bookingId);
+        return RestAssured.given(spec).body(body.toString()).contentType(ContentType.JSON).auth().preemptive().basic("admin","password123").patch("booking/" + bookingId);
     }
 
     protected Response deleteBooking(int bookingId){
-        return RestAssured.given().auth().preemptive().basic("admin", "password123").delete("https://restful-booker.herokuapp.com/booking/" + bookingId);
+        return RestAssured.given(spec).auth().preemptive().basic("admin", "password123").delete("booking/" + bookingId);
     }
 
     protected Response getBooking(int bookingId){

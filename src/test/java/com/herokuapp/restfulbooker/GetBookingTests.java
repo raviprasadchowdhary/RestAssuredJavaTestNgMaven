@@ -15,7 +15,7 @@ public class GetBookingTests extends BaseTest{
 
         Response responseCreateBooking = createBooking();
         int bookingId = responseCreateBooking.jsonPath().getInt("bookingid");
-        Response response = RestAssured.get("https://restful-booker.herokuapp.com/booking/" + bookingId);
+        Response response = RestAssured.given(spec).get("booking/" + bookingId);
 
         Assert.assertEquals(response.getStatusCode(), 200);
 

@@ -4,13 +4,13 @@ import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 
-public class HealthCheckTest {
+public class HealthCheckTest extends BaseTest{
 
     @Test
     public void healthCheckTest(){
-        given().
+        given(spec).
         when().
-                get("https://restful-booker.herokuapp.com/ping").
+                get("ping").
         then().
                 assertThat().
                 statusCode(201);
