@@ -1,5 +1,7 @@
 package com.herokuapp.restfulbooker;
 
+import com.herokuapp.restfulbooker.pojo.request.Booking;
+import com.herokuapp.restfulbooker.pojo.request.BookingDates;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
@@ -7,6 +9,8 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.json.JSONObject;
 import org.testng.annotations.BeforeMethod;
+
+import java.sql.SQLOutput;
 
 public class BaseTest {
     //reference: https://restful-booker.herokuapp.com/apidoc/index.html
@@ -38,12 +42,18 @@ public class BaseTest {
         return RestAssured.given(spec).body(body.toString()).contentType(ContentType.JSON).post("booking");
     }
 
+    protected Response createBookingByPojo(){
+        //create json body
+        BookingDates bookingDates = new BookingDates("2025-01-01","2025-01-10");
+        Booking booking = new Booking("Alex","Periera",100,true,bookingDates, "Wrestling");
+        return RestAssured.given(spec).log().all().contentType(ContentType.JSON).body(booking.toString()).post("booking");
+    }
+
     protected Response createBooking(String firstname, String lastname){
         //create json body
         JSONObject body = new JSONObject();
         body.put("firstname", firstname);
         body.put("lastname", lastname);
-        body.put("totalprice",100 );
         body.put("depositpaid", true);
 
         JSONObject bookingdates = new JSONObject();
