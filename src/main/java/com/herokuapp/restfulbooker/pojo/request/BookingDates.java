@@ -1,7 +1,5 @@
 package com.herokuapp.restfulbooker.pojo.request;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 public class BookingDates {
     private String checkin;
     private String checkout;

@@ -1,10 +1,6 @@
 package com.herokuapp.restfulbooker;
 
 
-import com.herokuapp.restfulbooker.pojo.request.Booking;
-import com.herokuapp.restfulbooker.pojo.request.BookingDates;
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;

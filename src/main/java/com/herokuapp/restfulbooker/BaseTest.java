@@ -10,8 +10,6 @@ import io.restassured.specification.RequestSpecification;
 import org.json.JSONObject;
 import org.testng.annotations.BeforeMethod;
 
-import java.sql.SQLOutput;
-
 public class BaseTest {
     //reference: https://restful-booker.herokuapp.com/apidoc/index.html
     RequestSpecification spec;
