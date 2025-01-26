@@ -9,7 +9,7 @@ import java.util.List;
 
 public class GetBookingIdsTests extends BaseTest{
 
-    @Test
+    @Test(enabled = true)
     public void getBookingIdsWithoutFilterTest(){
         // Get response
         Response response = RestAssured.given(spec).get("booking");
@@ -23,7 +23,7 @@ public class GetBookingIdsTests extends BaseTest{
 
     }
 
-    @Test
+    @Test(enabled = true)
     public void getBookingIdsWithFilterTest(){
         createBooking("Alex","Periera");
         //add query parameter

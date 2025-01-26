@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 public class DeleteBookingTests extends BaseTest{
 
-    @Test
+    @Test(enabled = true)
     public void deleteBookingTest(){
         Response responseCreateBooking = createBooking();
 
