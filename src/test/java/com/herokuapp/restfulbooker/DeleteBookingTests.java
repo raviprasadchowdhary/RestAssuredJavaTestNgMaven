@@ -14,5 +14,11 @@ public class DeleteBookingTests extends BaseTest{
 
         Assert.assertEquals(response.getStatusCode(), 201);
         Assert.assertEquals(response.getBody().asString(), "Created");
+
+        Response responseGetBooking = getBooking(responseCreateBooking.jsonPath().getInt("bookingid"));
+
+        Assert.assertEquals(responseGetBooking.getStatusCode(), 404);
+        Assert.assertEquals(responseGetBooking.getBody().asString(), "Not Found");
+
     }
 }

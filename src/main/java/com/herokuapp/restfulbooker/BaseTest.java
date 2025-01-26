@@ -61,4 +61,8 @@ public class BaseTest {
     protected Response deleteBooking(int bookingId){
         return RestAssured.given().auth().preemptive().basic("admin", "password123").delete("https://restful-booker.herokuapp.com/booking/" + bookingId);
     }
+
+    protected Response getBooking(int bookingId){
+        return RestAssured.given().get("https://restful-booker.herokuapp.com/booking/" + bookingId);
+    }
 }
