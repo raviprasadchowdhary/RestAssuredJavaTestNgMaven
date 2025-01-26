@@ -37,6 +37,25 @@ public class BaseTest {
         return RestAssured.given(spec).body(body.toString()).contentType(ContentType.JSON).post("booking");
     }
 
+    protected Response createBooking(String firstname, String lastname){
+        //create json body
+        JSONObject body = new JSONObject();
+        body.put("firstname", firstname);
+        body.put("lastname", lastname);
+        body.put("totalprice",100 );
+        body.put("depositpaid", true);
+
+        JSONObject bookingdates = new JSONObject();
+        bookingdates.put("checkin", "2025-01-01");
+        bookingdates.put("checkout", "2025-01-10");
+
+        body.put("bookingdates", bookingdates);
+        body.put("additionalneeds", "Wrestling");
+
+        //get response
+        return RestAssured.given(spec).body(body.toString()).contentType(ContentType.JSON).post("booking");
+    }
+
     protected Response updateBooking(int bookingId){
         //create json body
         JSONObject body = new JSONObject();
