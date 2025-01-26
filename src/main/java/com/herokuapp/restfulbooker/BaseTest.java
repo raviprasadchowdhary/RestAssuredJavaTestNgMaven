@@ -57,4 +57,8 @@ public class BaseTest {
 
         return RestAssured.given().body(body.toString()).contentType(ContentType.JSON).auth().preemptive().basic("admin","password123").patch("https://restful-booker.herokuapp.com/booking/" + bookingId);
     }
+
+    protected Response deleteBooking(int bookingId){
+        return RestAssured.given().auth().preemptive().basic("admin", "password123").delete("https://restful-booker.herokuapp.com/booking/" + bookingId);
+    }
 }
