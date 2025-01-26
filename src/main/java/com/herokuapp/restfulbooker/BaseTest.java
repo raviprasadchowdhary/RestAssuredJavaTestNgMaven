@@ -42,6 +42,19 @@ public class BaseTest {
         body.put("additionalneeds", "Wrestling2");
 
         //get response
-        return RestAssured.given().body(body.toString()).contentType(ContentType.JSON).header("Authorization", "Basic YWRtaW46cGFzc3dvcmQxMjM=").put("https://restful-booker.herokuapp.com/booking/" + bookingId);
+        return RestAssured.given().body(body.toString()).contentType(ContentType.JSON).auth().preemptive().basic("admin","password123").put("https://restful-booker.herokuapp.com/booking/" + bookingId);
+    }
+
+    protected Response partialUpdateBooking(int bookingId){
+        JSONObject body = new JSONObject();
+        body.put("firstname", "Conor");
+        body.put("lastname", "McGregor");
+
+        JSONObject bookingDates = new JSONObject();
+        bookingDates.put("checkin", "2025-02-01");
+        bookingDates.put("checkout", "2025-02-10");
+        body.put("bookingdates", bookingDates);
+
+        return RestAssured.given().body(body.toString()).contentType(ContentType.JSON).auth().preemptive().basic("admin","password123").patch("https://restful-booker.herokuapp.com/booking/" + bookingId);
     }
 }
