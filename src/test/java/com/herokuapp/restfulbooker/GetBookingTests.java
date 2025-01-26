@@ -14,8 +14,9 @@ public class GetBookingTests extends BaseTest{
     public void getBookingAndVerifyResponseTest(){
 
         Response responseCreateBooking = createBooking();
-        int bookingId = responseCreateBooking.jsonPath().getInt("bookingid");
-        Response response = RestAssured.given(spec).get("booking/" + bookingId);
+
+        spec.pathParam("bookingId", responseCreateBooking.jsonPath().getInt("bookingid"));
+        Response response = RestAssured.given(spec).get("booking/ {bookingId}");
 
         Assert.assertEquals(response.getStatusCode(), 200);
 
