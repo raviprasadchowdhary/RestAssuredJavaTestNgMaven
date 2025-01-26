@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
+    //reference: https://restful-booker.herokuapp.com/apidoc/index.html
     RequestSpecification spec;
 
     @BeforeMethod
